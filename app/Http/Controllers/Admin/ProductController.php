@@ -40,7 +40,9 @@ class ProductController extends Controller
             'type' => $request->description,
             'unit_price' => $request->unit_price,
             'quantity_weight' => $request->quantity_weight,
-            'discount' => $request->discount,
+            'kdv' => $request->kdv,
+            'withholding_status' => $request->withholding_status,
+            'height' => $request->height,
             'photo' => $save_url,
             'created_at' => Carbon::now(),
         ]);
@@ -82,7 +84,9 @@ class ProductController extends Controller
             'type' => $request->description,
             'unit_price' => $request->unit_price,
             'quantity_weight' => $request->quantity_weight,
-            'discount' => $request->discount,
+            'kdv' => $request->kdv,
+            'height' => $request->height,
+            'withholding_status' => $request->withholding_status,
             'photo' =>  $save_url,
         ]);
 

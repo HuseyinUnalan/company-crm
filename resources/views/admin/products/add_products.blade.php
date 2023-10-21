@@ -71,6 +71,8 @@
                                 </div>
                                 <!-- end row -->
 
+
+
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Birim Fiyatı </label>
                                     <div class="col-sm-10">
@@ -81,23 +83,42 @@
 
 
                                 <div class="row mb-3">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label">Adet / Ağırlık </label>
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Birim Adet / Ağırlık
+                                    </label>
                                     <div class="col-sm-10">
                                         <input class="form-control" name="quantity_weight" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
 
-
                                 <div class="row mb-3">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label">İskonto </label>
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Boy </label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="discount" type="text">
+                                        <input class="form-control" name="height" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
 
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">KDV </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="kdv" type="number">
+                                    </div>
+                                </div>
+                                <!-- end row -->
 
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Tevkifat Durumu</label>
+                                    <div class="col-sm-10">
+                                        <select name="withholding_status" class="form-select"
+                                            aria-label="Default select example">
+                                            <option selected="">Seçim Yapın</option>
+                                            <option value="1">Var</option>
+                                            <option value="2">Yok</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- end row -->
 
 
 

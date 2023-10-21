@@ -19,9 +19,11 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('unit_price')->nullable();
             $table->string('quantity_weight')->nullable();
-            $table->string('discount')->nullable();
+            $table->string('height')->nullable();
+            $table->string('kdv')->nullable();
+            $table->string('withholding_status')->nullable();
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

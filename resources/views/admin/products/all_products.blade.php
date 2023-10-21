@@ -21,6 +21,19 @@
             </div>
             <!-- end page title -->
 
+            {{-- <form action="" method="POST">
+                @csrf
+                <div class="container mt-2 mb-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="İskonto Güncelle">
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-success">İskonto Güncelle</button>
+                        </div>
+                    </div>
+                </div>
+            </form> --}}
 
 
             <div class="row">
@@ -43,6 +56,7 @@
                                                     <th>#</th>
                                                     <th>Ad</th>
                                                     <th>Birim Fiyat</th>
+                                                    <th>% KDV</th>
                                                     <th>İşlemler</th>
                                                 </tr>
                                             </thead>
@@ -57,6 +71,14 @@
                                                         <td>{{ $i++ }}</td>
                                                         <td>{{ $item->name }}</td>
                                                         <td>{{ $item->unit_price }}</td>
+                                                        <td>
+                                                            @if ($item->withholding_status == 1)
+                                                                {{ $item->kdv / 2 }} (Tevkifat Var)
+                                                            @else
+                                                                {{ $item->kdv }}
+                                                            @endif
+                                                        </td>
+
 
                                                         <td>
                                                             <a href="{{ route('edit.product', $item->id) }}">
