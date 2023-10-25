@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('customer_id');
+            $table->string('delivery_date');
+            $table->string('person_to_pay_shipping_cost');
             $table->string('date');
             $table->timestamps();
         });

@@ -31,7 +31,7 @@
                 </li>
 
 
-                {{-- @if (auth()->check() && auth()->user()->statu == 1) --}}
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-honour-line"></i>
@@ -42,8 +42,7 @@
                         <li><a href="{{ route('add.customer') }}">Müşteri Ekle</a></li>
                     </ul>
                 </li>
-                {{-- @else
-                @endif --}}
+
 
 
                 <li>
@@ -55,12 +54,45 @@
                         <li><a href="{{ route('calculate') }}">Teklif Hazırla</a></li>
                         <li><a href="{{ route('my.offers') }}">Tekliflerim</a></li>
 
-                        
+
                     </ul>
                 </li>
 
+                @if (auth()->check() && auth()->user()->statu == 1)
+                    <li class="menu-title">Süper Admin</li>
+                    <li>
+                        <a href="{{ route('super.admin.all.offers') }}">
+                            <i class="ri-honour-line"></i>
+                            <span>Bütün Teklifler</span>
+                        </a>
 
+                    </li>
 
+                    <li>
+                        <a href="{{ route('super.admin.all.users') }}">
+                            <i class="ri-honour-line"></i>
+                            <span>Bütün Kullanıcılar</span>
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a href="{{ route('super.admin.all.products') }}">
+                            <i class="ri-honour-line"></i>
+                            <span>Bütün Ürünler</span>
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a href="{{ route('super.admin.all.customers') }}">
+                            <i class="ri-honour-line"></i>
+                            <span>Bütün Müşteriler</span>
+                        </a>
+
+                    </li>
+                @else
+                @endif
 
             </ul>
         </div>

@@ -95,7 +95,6 @@
                                         <!-- Toplam fiyatlar ve kilolar için tfoot -->
                                     <tfoot>
                                         <tr>
-                                            {{-- <th colspan="5">Genel Toplam</th> --}}
                                             {{-- <td>{{ number_format($grandTotalWeight, 2, ',', '.') }}</td> --}}
                                             <td></td>
                                             <td></td>
@@ -106,9 +105,8 @@
                                             <td>{{ number_format($grandTotalAmount, 2, ',', '.') }} TL</td>
                                         </tr>
                                         <tr>
-                                            {{-- <th colspan="5">Tevkifatlı Ara Toplam</th> --}}
-                                            <td></td>
-                                            <td></td>
+                                            <td>Teslim Tarihi:</td>
+                                            <td>{{ $offer->delivery_date }} </td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -117,9 +115,14 @@
                                         </tr>
 
                                         <tr>
-                                            {{-- <th colspan="5">Tevkifatsız Ara Toplam</th> --}}
-                                            <td></td>
-                                            <td></td>
+                                            <td>Nakliye Bedeli:</td>
+                                            <td>
+                                                @if ($offer->person_to_pay_shipping_cost == 1)
+                                                    Alıcıya Aittir
+                                                @elseif ($offer->person_to_pay_shipping_cost == 2)
+                                                    Göndericiye Aittir
+                                                @endif
+                                            </td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -128,7 +131,6 @@
                                         </tr>
 
                                         <tr>
-                                            {{-- <th colspan="5">Tevkifatlı KDV</th> --}}
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -139,7 +141,6 @@
                                         </tr>
 
                                         <tr>
-                                            {{-- <th colspan="5"> KDV</th> --}}
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -150,7 +151,6 @@
                                         </tr>
 
                                         <tr>
-                                            {{-- <th colspan="5"> Toplam Fiyat</th> --}}
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -158,7 +158,8 @@
                                             <td></td>
                                             <td>Toplam Fiyat</td>
                                             <td style="font-size: 18px;">
-                                                <b>{{ number_format($lastgrandTotalAmount, 2, ',', '.') }} TL</b> </td>
+                                                <b>{{ number_format($lastgrandTotalAmount, 2, ',', '.') }} TL</b>
+                                            </td>
                                         </tr>
 
                                     </tfoot>

@@ -46,8 +46,29 @@
                                 </div>
 
 
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Nakliye Bedeli </label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="person_to_pay_shipping_cost" type="text"
+                                            required>
+                                            <option value="1">Alıcı Ödeyecek</option>
+                                            <option value="2">Gönderici Ödeyecek</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Teslimat Tarihi </label>
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control" name="delivery_date" type="text"
+                                            required>
+
+                                    </div>
+                                </div>
+
                                 <!-- Gizli (Hidden) Input Alanları -->
-                                <input type="text" name="sales_data" id="hiddenSalesData" />
+                                <input type="hidden" name="sales_data" id="hiddenSalesData" />
 
 
                                 <input type="submit" class="btn btn-info waves-effect waves-light" value="Kaydet">
@@ -266,7 +287,7 @@
                                                         var amount = total_weight * unit_price;
                                                         total = amount.toFixed(2);
                                                     } else if (type === 3) {
-                                                        var amount = height * quantity *unit_price;
+                                                        var amount = height * quantity * unit_price;
                                                         total = amount.toFixed(2);
                                                     }
                                                     var netAmount = amount * (1 - (discount / 100));

@@ -16,4 +16,9 @@ class Offers extends Model
     {
         return $this->belongsTo(Customers::class, 'customer_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

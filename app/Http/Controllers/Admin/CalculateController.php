@@ -72,6 +72,8 @@ class CalculateController extends Controller
         // $sales->total_price = 0; // Önce toplam fiyatı 0 olarak atayalım, aşağıda güncelleyeceğiz
         $sales->customer_id = $request->customer_id;
         $sales->user_id = $userid;
+        $sales->delivery_date = $request->delivery_date;
+        $sales->person_to_pay_shipping_cost = $request->person_to_pay_shipping_cost;
         $sales->date = Carbon::now();
         $sales->save();
         $salesId = $sales->id; // Dönen id'yi alalım
@@ -113,13 +115,15 @@ class CalculateController extends Controller
             'alert-type' => 'success'
         );
         // Başarıyla kaydedildiğine dair mesaj döndür
-        return redirect()->back()->with($notification);
+        return redirect()->route('detail.offer', ['id' => $salesId, 'user_id' => $userid])->with($notification);
     }
 
     public function MyOffers()
     {
         $userid = auth()->user()->id;
-        $offers = Offers::where('user_id', $userid)->get();
+        $offers = Offers::where('user_id', $userid)
+            ->orderBy('created_at', 'desc') // 'created_at' sütununa göre azalan sıralama
+            ->get();
         return view('admin.calculations.my_offers', compact('offers'));
     }
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CalculateController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SuperAdminController;
 use App\Http\Middleware\CheckUserStatus;
 use Illuminate\Support\Facades\Route;
 
@@ -83,10 +84,20 @@ Route::middleware(['user'])->group(function () { // Kernel.php de yol eklendi
         Route::get('my/offers', 'MyOffers')->name('my.offers');
         Route::get('detail/offer/{id}/{user_id}', 'DetailOffer')->name('detail.offer');
         Route::get('delete/offer/{id}', 'DeleteOffer')->name('delete.offer');
-
     });
 
     Route::get('/get-product-details/{id}', [CalculateController::class, 'getProductDetailsAjax']);
 
 
+    Route::controller(SuperAdminController::class)->prefix('super/admin/')->group(function () {
+        // Gate kontrolü eklemek için can yöntemini kullanın
+        Route::middleware('can:access-customer')->group(function () {
+            Route::get('all/customers', 'AllCustomers')->name('super.admin.all.customers');
+            Route::get('all/products', 'AllProducts')->name('super.admin.all.products');
+            Route::get('all/users', 'AllUsers')->name('super.admin.all.users');
+            Route::get('all/offers', 'AllOffers')->name('super.admin.all.offers');
+
+        });
+        Route::get('detail/user/{id}', 'DetailUser')->name('detail.user');
+    });
 });
