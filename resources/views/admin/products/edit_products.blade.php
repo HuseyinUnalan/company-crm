@@ -74,6 +74,8 @@
                                                 Adet</option>
                                             <option value="2" {{ $product->type == 2 ? 'selected' : '' }}>Ağırlık
                                             </option>
+                                            <option value="3" {{ $product->type == 3 ? 'selected' : '' }}>Metre
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -109,7 +111,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">KDV </label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="kdv" type="number" value="{{ $product->kdv }}">
+                                        <input class="form-control" name="entered_kdv" type="number" value="{{ $product->entered_kdv }}">
                                     </div>
                                 </div>
                                 <!-- end row -->

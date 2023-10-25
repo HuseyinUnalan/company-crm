@@ -11,7 +11,8 @@ class CustomerController extends Controller
 {
     public function AllCustomers()
     {
-        $customers = Customers::all();
+        $userid = auth()->user()->id; 
+        $customers = Customers::where('user_id', $userid)->get();
         return view('admin.customers.all_customers', compact('customers'));
     }
 
@@ -36,6 +37,7 @@ class CustomerController extends Controller
 
         Customers::insert([
             'name' => $request->name,
+            'user_id' => auth()->user()->id,
             'slug' => strtolower(str_replace($search, $replace, $request->name)),
             'created_at' => Carbon::now(),
         ]);
@@ -76,7 +78,7 @@ class CustomerController extends Controller
 
     public function DeleteCustomer($id)
     {
-       
+
         Customers::findOrFail($id)->delete();
 
         $notification = array(

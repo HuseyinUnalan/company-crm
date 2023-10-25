@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+
     public function AllProducts()
     {
-        $products = Products::all();
+        $userid = auth()->user()->id;
+        $products = Products::where('user_id', $userid)->get();
         return view('admin.products.all_products', compact('products'));
     }
 
@@ -30,17 +33,25 @@ class ProductController extends Controller
             $save_url = $data['photo'] = 'upload/products/' . $filename;
         }
 
+        if ($request->withholding_status == 1) {
+            $kdv = $request->entered_kdv / 2;
+        } else if ($request->withholding_status == 2) {
+            $kdv = $request->entered_kdv;
+        }
+
         $search = array('Ç', 'ç', 'Ğ', 'ğ', 'ı', 'İ', 'Ö', 'ö', 'Ş', 'ş', 'Ü', 'ü', ' ', '/');
         $replace = array('c', 'c', 'g', 'g', 'i', 'i', 'o', 'o', 's', 's', 'u', 'u', '-', '-');
 
 
         Products::insert([
             'name' => $request->name,
+            'user_id' => auth()->user()->id,
             'slug' => strtolower(str_replace($search, $replace, $request->name)),
-            'type' => $request->description,
+            'type' => $request->type,
             'unit_price' => $request->unit_price,
             'quantity_weight' => $request->quantity_weight,
-            'kdv' => $request->kdv,
+            'entered_kdv' => $request->entered_kdv,
+            'kdv' => $kdv,
             'withholding_status' => $request->withholding_status,
             'height' => $request->height,
             'photo' => $save_url,
@@ -71,6 +82,12 @@ class ProductController extends Controller
 
         $save_url = $request->old_image;
 
+        if ($request->withholding_status == 1) {
+            $kdv = $request->entered_kdv / 2;
+        } else if ($request->withholding_status == 2) {
+            $kdv = $request->entered_kdv;
+        }
+
         if ($request->file('photo')) {
             $file = $request->file('photo');
             @unlink($old_img);
@@ -81,10 +98,11 @@ class ProductController extends Controller
         Products::findOrFail($product_id)->update([
             'name' => $request->name,
             'slug' => strtolower(str_replace($search, $replace, $request->name)),
-            'type' => $request->description,
+            'type' => $request->type,
             'unit_price' => $request->unit_price,
             'quantity_weight' => $request->quantity_weight,
-            'kdv' => $request->kdv,
+            'entered_kdv' => $request->entered_kdv,
+            'kdv' => $kdv,
             'height' => $request->height,
             'withholding_status' => $request->withholding_status,
             'photo' =>  $save_url,

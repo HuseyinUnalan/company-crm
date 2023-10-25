@@ -66,6 +66,7 @@
                                             <option selected="">Seçim Yapın</option>
                                             <option value="1">Adet</option>
                                             <option value="2">Ağırlık</option>
+                                            <option value="3">Metre</option>
                                         </select>
                                     </div>
                                 </div>
@@ -102,7 +103,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">KDV </label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="kdv" type="number">
+                                        <input class="form-control" name="entered_kdv" type="number">
                                     </div>
                                 </div>
                                 <!-- end row -->

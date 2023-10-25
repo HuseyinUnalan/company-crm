@@ -15,8 +15,9 @@ class IndexController extends Controller
 {
     public function Index()
     {
-        $productCount = Products::count();
-        $customerCount = Customers::count();
+        $userid = auth()->user()->id;
+        $productCount = Products::where('user_id', $userid)->count();
+        $customerCount = Customers::where('user_id', $userid)->count();
         $userCount = User::count();
         return view('admin.index', compact('productCount', 'customerCount', 'userCount'));
     }

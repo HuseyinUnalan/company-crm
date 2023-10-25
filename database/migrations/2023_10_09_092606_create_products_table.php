@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('user_id');
             $table->string('photo')->nullable();
             $table->string('slug')->nullable();
             $table->string('type')->nullable();
@@ -21,7 +22,9 @@ return new class extends Migration
             $table->string('quantity_weight')->nullable();
             $table->string('height')->nullable();
             $table->string('kdv')->nullable();
+            $table->string('entered_kdv')->nullable();
             $table->string('withholding_status')->nullable();
+            $table->string('quantity')->default(1);
             $table->timestamps();
         }); 
     }
