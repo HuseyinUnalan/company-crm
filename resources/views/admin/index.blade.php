@@ -56,8 +56,8 @@
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="flex-grow-1">
-                                    <p class="text-truncate font-size-14 mb-2">Kullanıcı</p>
-                                    <h4 class="mb-2">{{ $userCount }}</h4>
+                                    <p class="text-truncate font-size-14 mb-2">Tekliflerim</p>
+                                    <h4 class="mb-2">{{ $myoffersCount }}</h4>
                                 </div>
                                 <div class="avatar-sm">
                                     <span class="avatar-title bg-light text-success rounded-3">

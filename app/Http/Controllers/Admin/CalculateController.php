@@ -155,4 +155,14 @@ class CalculateController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    public function PrintInvoice($id)
+    {
+        $offer = Offers::find($id);
+        $offerproducts = OfferDetail::where('sales_id', $id)->get();
+        $number = 1;
+        return view('admin.calculations.invoice', compact('offer', 'offerproducts', 'number'));
+    }
+
+
 }

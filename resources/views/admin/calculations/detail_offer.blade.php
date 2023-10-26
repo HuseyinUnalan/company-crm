@@ -169,6 +169,11 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="col-lg-2">
+                    <a href="{{ route('print.invoice', $offer->id) }}" target="_blank" class="btn btn-success">Fatura Yazdır</a>
+                </div>
             </div>
             <!-- end row -->
 

@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="{{ route('/') }}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="" alt="logo-sm" width="160" height="auto">
+                        <img src="{{ asset('upload/avantaj.jpg') }}" alt="logo-sm" width="160" height="auto">
                     </span>
                     <span class="logo-lg">
-                        <img src="" alt="logo-dark" width="160" height="auto">
+                        <img src="{{ asset('upload/avantaj.jpg') }}" alt="logo-dark" width="160" height="auto">
                     </span>
                 </a>
 
                 <a href="{{ route('/') }}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="" alt="logo-sm-light" width="160" height="auto">
+                        <img src="{{ asset('upload/avantaj.jpg') }}" alt="logo-sm-light" width="160" height="auto">
                     </span>
                     <span class="logo-lg">
-                        <img src="" alt="logo-light" width="160" height="auto">
+                        <img src="{{ asset('upload/avantaj.jpg') }}" alt="logo-light" width="160" height="auto">
                     </span>
                 </a>
             </div>
@@ -54,7 +54,7 @@
 
 
             @php
-                
+
                 $id = Auth::user()->id;
                 $adminData = App\Models\User::find($id);
             @endphp

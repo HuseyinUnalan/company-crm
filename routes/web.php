@@ -84,6 +84,8 @@ Route::middleware(['user'])->group(function () { // Kernel.php de yol eklendi
         Route::get('my/offers', 'MyOffers')->name('my.offers');
         Route::get('detail/offer/{id}/{user_id}', 'DetailOffer')->name('detail.offer');
         Route::get('delete/offer/{id}', 'DeleteOffer')->name('delete.offer');
+        Route::get('print/invoice/{id}', 'PrintInvoice')->name('print.invoice');
+        Route::get('/download-pdf/{id}', 'DownloadInvoicePdf')->name('download.invoice.pdf');
     });
 
     Route::get('/get-product-details/{id}', [CalculateController::class, 'getProductDetailsAjax']);

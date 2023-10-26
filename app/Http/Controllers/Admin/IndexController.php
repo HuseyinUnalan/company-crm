@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customers;
+use App\Models\Offers;
 use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,8 +19,9 @@ class IndexController extends Controller
         $userid = auth()->user()->id;
         $productCount = Products::where('user_id', $userid)->count();
         $customerCount = Customers::where('user_id', $userid)->count();
+        $myoffersCount = Offers::where('user_id', $userid)->count();
         $userCount = User::count();
-        return view('admin.index', compact('productCount', 'customerCount', 'userCount'));
+        return view('admin.index', compact('productCount', 'customerCount', 'userCount', 'myoffersCount'));
     }
 
     public function EditProfile()
