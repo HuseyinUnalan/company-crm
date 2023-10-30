@@ -46,23 +46,27 @@
                                 </div>
 
 
-                                <div class="row mb-3">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label">Nakliye Bedeli </label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control" name="person_to_pay_shipping_cost" type="text"
-                                            required>
-                                            <option value="1">Alıcı Ödeyecek</option>
-                                            <option value="2">Gönderici Ödeyecek</option>
-                                        </select>
-                                    </div>
-                                </div>
-
 
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Teslimat Tarihi </label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" name="delivery_date" type="text"
-                                            required>
+                                        <input type="date" class="form-control" name="delivery_date" required>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Teklif Opsiyonu </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="bid_option" required>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Ödeme Koşulları </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="terms_of_payment" required>
 
                                     </div>
                                 </div>
@@ -82,9 +86,7 @@
 
 
 
-                    <style>
-
-                    </style>
+                  
 
                     <div class="col-md-12">
                         <div class="classic-card my-2 bg-white">
@@ -156,13 +158,11 @@
                                                                             <label id="email-label" for="">Birim
                                                                                 Fiyat</label>
                                                                             <input type="number" class="form-control"
-                                                                                id="priceInput" placeholder="Fiyat"
-                                                                                disabled>
+                                                                                id="priceInput" placeholder="Fiyat">
 
                                                                         </div>
                                                                     </div>
 
-                                                                    <input type="hidden" id="productWithholding">
                                                                     <input type="hidden" id="type">
 
                                                                     <div class="col-md-4">
@@ -200,16 +200,31 @@
 
 
 
+                                                                    {{-- <input type="hidden" id="productWithholding"> --}}
+
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
                                                                             <label id="email-label"
-                                                                                for="">İndirim</label>
-                                                                            <input type="number" class="form-control"
+                                                                                for="">Tevkifat Durumu</label>
+                                                                            <select name="" id="productWithholding"
+                                                                                class="form-control" required>
+                                                                                <option value="1">Var</option>
+                                                                                <option value="2">Yok</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            {{-- <label id="email-label"
+                                                                                for="">İndirim</label> --}}
+                                                                            <input type="hidden" class="form-control"
                                                                                 id="discountInput" value="0">
 
                                                                         </div>
                                                                     </div>
-
 
 
                                                                 </div>
@@ -288,6 +303,9 @@
                                                         total = amount.toFixed(2);
                                                     } else if (type === 3) {
                                                         var amount = height * quantity * unit_price;
+                                                        total = amount.toFixed(2);
+                                                    } else if (type === 4) {
+                                                        var amount = unit_price;
                                                         total = amount.toFixed(2);
                                                     }
                                                     var netAmount = amount * (1 - (discount / 100));

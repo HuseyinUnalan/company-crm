@@ -62,11 +62,29 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Birim Seç</label>
                                     <div class="col-sm-10">
-                                        <select name="type" class="form-select" aria-label="Default select example">
-                                            <option selected="">Seçim Yapın</option>
+                                        <select name="type" class="form-select" aria-label="Default select example"
+                                            required>
+                                            <option value="" selected="">Seçim Yapın</option>
                                             <option value="1">Adet</option>
                                             <option value="2">Ağırlık</option>
                                             <option value="3">Metre</option>
+                                            <option value="4">Diğer</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Kategori Seç</label>
+                                    <div class="col-sm-10">
+                                        <select name="category" class="form-select" aria-label="Default select example"
+                                            required>
+                                            <option value="" selected="">Seçim Yapın</option>
+                                            @foreach ($productcategories as $productscategory)
+                                                <option value="{{ $productscategory->id }}">{{ $productscategory->name }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -77,7 +95,15 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Birim Fiyatı </label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="unit_price" type="text">
+                                        <input class="form-control" name="entered_unit_price" type="text" required>
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">İskonto </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="discount" type="number" required>
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -87,7 +113,7 @@
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Birim Adet / Ağırlık
                                     </label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="quantity_weight" type="text">
+                                        <input class="form-control" name="quantity_weight" type="text" required>
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -95,7 +121,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Boy </label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="height" type="text">
+                                        <input class="form-control" name="height" type="text" required>
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -103,7 +129,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">KDV </label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="entered_kdv" type="number">
+                                        <input class="form-control" name="entered_kdv" type="number" required>
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -112,8 +138,8 @@
                                     <label class="col-sm-2 col-form-label">Tevkifat Durumu</label>
                                     <div class="col-sm-10">
                                         <select name="withholding_status" class="form-select"
-                                            aria-label="Default select example">
-                                            <option selected="">Seçim Yapın</option>
+                                            aria-label="Default select example" required>
+                                            <option value="" selected="">Seçim Yapın</option>
                                             <option value="1">Var</option>
                                             <option value="2">Yok</option>
                                         </select>
@@ -123,7 +149,18 @@
 
 
 
-
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Toplu İskontodan Etkilensin mi </label>
+                                    <div class="col-sm-10">
+                                        <select name="general_discount_product" class="form-select"
+                                            aria-label="Default select example" required>
+                                            <option value="" selected="">Seçim Yapın</option>
+                                            <option value="1">Evet</option>
+                                            <option value="0">Hayır</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- end row -->
 
 
 

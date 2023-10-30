@@ -21,19 +21,36 @@
             </div>
             <!-- end page title -->
 
-            {{-- <form action="" method="POST">
+            <form action="{{ route('update.discount') }}" method="POST">
                 @csrf
                 <div class="container mt-2 mb-2">
                     <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="İskonto Güncelle">
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" placeholder="İskonto Güncelle" name="discount_value">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
+                            <select name="category_id" class="form-control">
+                                @foreach ($productcategories as $productcategory)
+                                    <option value="{{ $productcategory->id }}">{{ $productcategory->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-2">
                             <button type="submit" class="btn btn-success">İskonto Güncelle</button>
+                        </div>
+
+                        <div class="col-md-2">
+                            <a href="{{ route('add.product.excel') }}" class="btn btn-primary">Excel İle Ürün Ekle</a>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="{{ route('export.product.excel') }}" class="btn btn-secondary">Excel Ürün Dışa
+                                Aktar</a>
                         </div>
                     </div>
                 </div>
-            </form> --}}
+            </form>
+
+
 
 
             <div class="row">
@@ -57,6 +74,7 @@
                                                     <th>Ad</th>
                                                     <th>Birim Fiyat</th>
                                                     <th>% KDV</th>
+                                                    <th>% İskonto</th>
                                                     <th>İşlemler</th>
                                                 </tr>
                                             </thead>
@@ -78,8 +96,7 @@
                                                                 {{ $item->kdv }}
                                                             @endif
                                                         </td>
-
-
+                                                        <td>{{ $item->discount }}</td>
                                                         <td>
                                                             <a href="{{ route('edit.product', $item->id) }}">
                                                                 <button class="btn btn-primary btn-sm">

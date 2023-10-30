@@ -68,14 +68,36 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Birim Seç</label>
                                     <div class="col-sm-10">
-                                        <select name="type" class="form-select" aria-label="Default select example">
-                                            <option selected="">Seçim Yapın</option>
+                                        <select name="type" class="form-select" aria-label="Default select example"
+                                            required>
+                                            <option value="" selected="">Seçim Yapın</option>
                                             <option value="1" {{ $product->type == 1 ? 'selected' : '' }}>
                                                 Adet</option>
                                             <option value="2" {{ $product->type == 2 ? 'selected' : '' }}>Ağırlık
                                             </option>
                                             <option value="3" {{ $product->type == 3 ? 'selected' : '' }}>Metre
                                             </option>
+                                            <option value="4" {{ $product->type == 4 ? 'selected' : '' }}>Diğer
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Kategori Seç</label>
+                                    <div class="col-sm-10">
+                                        <select name="category" class="form-select" aria-label="Default select example"
+                                            required>
+                                            <option value="" selected="">Seçim Yapın</option>
+                                            @foreach ($productcategories as $productscategory)
+                                                <option value="{{ $productscategory->id }}"
+                                                    {{ $product->category == $productscategory->id ? 'selected' : '' }}>
+                                                    {{ $productscategory->name }}
+                                                </option>
+                                            @endforeach
+
                                         </select>
                                     </div>
                                 </div>
@@ -84,18 +106,42 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Birim Fiyatı </label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="unit_price"
-                                            value="{{ $product->unit_price }}">
+                                        <input type="text" class="form-control" name="entered_unit_price"
+                                            value="{{ $product->entered_unit_price }}" required>
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">İskonto </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="discount" type="number"
+                                            value="{{ $product->discount }}" required>
                                     </div>
                                 </div>
                                 <!-- end row -->
 
 
+                                @if ($product->discount > 0)
+                                    <div class="row mb-3">
+                                        <label for="example-text-input" class="col-sm-2 col-form-label">İskonto Dahil
+                                            Fiyat</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" name="" value="{{ $product->unit_price }}"
+                                                type="number" disabled>
+                                        </div>
+                                    </div>
+                                    <!-- end row -->
+                                @endif
+
+
+
                                 <div class="row mb-3">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label">Birim Adet / Ağırlık </label>
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Birim Adet / Ağırlık
+                                    </label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="quantity_weight"
-                                            value="{{ $product->quantity_weight }}">
+                                            value="{{ $product->quantity_weight }}" required>
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -103,7 +149,8 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Boy </label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="height" type="text" value="{{ $product->height }}">
+                                        <input class="form-control" name="height" type="text"
+                                            value="{{ $product->height }}" required>
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -111,7 +158,8 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">KDV </label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" name="entered_kdv" type="number" value="{{ $product->entered_kdv }}">
+                                        <input class="form-control" name="entered_kdv" type="number"
+                                            value="{{ $product->entered_kdv }}" required>
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -124,17 +172,30 @@
                                     <label class="col-sm-2 col-form-label">Tevkifat Durumu</label>
                                     <div class="col-sm-10">
                                         <select name="withholding_status" class="form-select"
-                                            aria-label="Default select example">
-                                            <option selected="">Seçim Yapın</option>
-                                            <option value="1" {{ $product->withholding_status == 1 ? 'selected' : '' }}>Var</option>
-                                            <option value="2" {{ $product->withholding_status == 2 ? 'selected' : '' }}>Yok</option>
+                                            aria-label="Default select example" required>
+                                            <option value="" selected="">Seçim Yapın</option>
+                                            <option value="1"
+                                                {{ $product->withholding_status == 1 ? 'selected' : '' }}>Var</option>
+                                            <option value="2"
+                                                {{ $product->withholding_status == 2 ? 'selected' : '' }}>Yok</option>
                                         </select>
                                     </div>
                                 </div>
                                 <!-- end row -->
 
 
-
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Toplu İskontodan Etkilensin mi </label>
+                                    <div class="col-sm-10">
+                                        <select name="general_discount_product" class="form-select"
+                                            aria-label="Default select example" required>
+                                            <option value="" selected="">Seçim Yapın</option>
+                                            <option value="1" {{ $product->general_discount_product == 1 ? 'selected' : '' }}>Evet</option>
+                                            <option value="0" {{ $product->general_discount_product == 0 ? 'selected' : '' }}>Hayır</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- end row -->
 
 
 

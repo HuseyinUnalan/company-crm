@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\CustomersExport;
 use App\Http\Controllers\Controller;
+use App\Imports\CustomersImport;
 use App\Models\Customers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
     public function AllCustomers()
     {
-        $userid = auth()->user()->id; 
+        $userid = auth()->user()->id;
         $customers = Customers::where('user_id', $userid)->get();
         return view('admin.customers.all_customers', compact('customers'));
     }
@@ -37,6 +40,11 @@ class CustomerController extends Controller
 
         Customers::insert([
             'name' => $request->name,
+            'address' => $request->address,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'tax_number' => $request->tax_number,
+            'tax_administration' => $request->tax_administration,
             'user_id' => auth()->user()->id,
             'slug' => strtolower(str_replace($search, $replace, $request->name)),
             'created_at' => Carbon::now(),
@@ -65,6 +73,11 @@ class CustomerController extends Controller
 
         Customers::findOrFail($customer_id)->update([
             'name' => $request->name,
+            'address' => $request->address,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'tax_number' => $request->tax_number,
+            'tax_administration' => $request->tax_administration,
             'slug' => strtolower(str_replace($search, $replace, $request->name)),
         ]);
 
@@ -86,5 +99,44 @@ class CustomerController extends Controller
             'alert-type' => 'info'
         );
         return redirect()->back()->with($notification);
+    }
+
+    public function AddCustomerExcel()
+    {
+        return view('admin.customers.customers_excel_import');
+    }
+
+    public function StoreCustomerExcel(Request $request)
+    {
+        $file = $request->file;
+
+
+
+        if ($file) {
+
+            try {
+                Excel::import(new CustomersImport, $file);
+
+                $notification = array(
+                    'message' => 'Ekleme Başarılı.',
+                    'alert-type' => 'success'
+                );
+
+                return redirect()->back()->with($notification);
+            } catch (\Exception $ex) {
+                // $notification = array(
+                //     'message' => 'Ekleme Başarısız.',
+                //     'alert-type' => 'danger'
+                // );
+
+                // return redirect()->back()->with($notification);
+                dd($ex);
+            }
+        }
+    }
+
+    public function export()
+    {
+        return Excel::download(new CustomersExport, 'müşterilerim.xlsx');
     }
 }

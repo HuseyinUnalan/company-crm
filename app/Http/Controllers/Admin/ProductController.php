@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ProductsExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ProductsImport;
+use App\Models\ProductCategories;
 use App\Models\Products;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -15,12 +19,15 @@ class ProductController extends Controller
     {
         $userid = auth()->user()->id;
         $products = Products::where('user_id', $userid)->get();
-        return view('admin.products.all_products', compact('products'));
+        $productcategories = ProductCategories::where('user_id', $userid)->get();
+        return view('admin.products.all_products', compact('products', 'productcategories'));
     }
 
     public function AddProduct()
     {
-        return view('admin.products.add_products');
+        $userid = auth()->user()->id;
+        $productcategories = ProductCategories::where('user_id', $userid)->get();
+        return view('admin.products.add_products', compact('productcategories'));
     }
 
 
@@ -48,12 +55,16 @@ class ProductController extends Controller
             'user_id' => auth()->user()->id,
             'slug' => strtolower(str_replace($search, $replace, $request->name)),
             'type' => $request->type,
-            'unit_price' => $request->unit_price,
             'quantity_weight' => $request->quantity_weight,
             'entered_kdv' => $request->entered_kdv,
             'kdv' => $kdv,
             'withholding_status' => $request->withholding_status,
             'height' => $request->height,
+            'category' => $request->category,
+            'discount' => $request->discount,
+            'entered_unit_price' => $request->entered_unit_price,
+            'unit_price' => $request->entered_unit_price - ($request->entered_unit_price * $request->discount / 100),
+            'general_discount_product' => $request->general_discount_product,
             'photo' => $save_url,
             'created_at' => Carbon::now(),
         ]);
@@ -69,7 +80,9 @@ class ProductController extends Controller
     public function EditProduct($id)
     {
         $product = Products::find($id);
-        return view('admin.products.edit_products', compact('product'));
+        $userid = auth()->user()->id;
+        $productcategories = ProductCategories::where('user_id', $userid)->get();
+        return view('admin.products.edit_products', compact('product', 'productcategories'));
     }
 
     public function UpdateProduct(Request $request)
@@ -99,12 +112,16 @@ class ProductController extends Controller
             'name' => $request->name,
             'slug' => strtolower(str_replace($search, $replace, $request->name)),
             'type' => $request->type,
-            'unit_price' => $request->unit_price,
             'quantity_weight' => $request->quantity_weight,
             'entered_kdv' => $request->entered_kdv,
             'kdv' => $kdv,
             'height' => $request->height,
             'withholding_status' => $request->withholding_status,
+            'category' => $request->category,
+            'discount' => $request->discount,
+            'entered_unit_price' => $request->entered_unit_price,
+            'unit_price' => $request->entered_unit_price - ($request->entered_unit_price * $request->discount / 100),
+            'general_discount_product' => $request->general_discount_product,
             'photo' =>  $save_url,
         ]);
 
@@ -130,5 +147,65 @@ class ProductController extends Controller
             'alert-type' => 'info'
         );
         return redirect()->back()->with($notification);
+    }
+
+    public function AddProductExcel()
+    {
+        return view('admin.products.products_excel_import');
+    }
+
+    public function StoreProductExcel(Request $request)
+    {
+        $file = $request->file;
+
+
+
+        if ($file) {
+
+            try {
+                Excel::import(new ProductsImport, $file);
+
+                $notification = array(
+                    'message' => 'Ekleme Başarılı.',
+                    'alert-type' => 'success'
+                );
+
+                return redirect()->back()->with($notification);
+            } catch (\Exception $ex) {
+                // $notification = array(
+                //     'message' => 'Ekleme Başarısız.',
+                //     'alert-type' => 'danger'
+                // );
+
+                // return redirect()->back()->with($notification);
+                dd($ex);
+            }
+        }
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProductsExport, 'ürünlerim.xlsx');
+    }
+
+    public function updateDiscount(Request $request)
+    {
+        $categoryId = $request->input('category_id');
+        $discountValue = $request->input('discount_value');
+
+        // Kategoriye ait ürünleri al
+        $products = Products::where('category', $categoryId)->get();
+
+        // Ürünleri döngüye al ve işlemleri yap
+        foreach ($products as $product) {
+            // İskonto işlemleri burada yapılır
+            if ($product->general_discount_product == 1) {
+                $product->discount = $discountValue;
+                $product->unit_price = $product->entered_unit_price - ($product->entered_unit_price * $discountValue / 100);
+                $product->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'İskonto güncellendi');
     }
 }

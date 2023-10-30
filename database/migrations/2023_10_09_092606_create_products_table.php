@@ -25,6 +25,10 @@ return new class extends Migration
             $table->string('entered_kdv')->nullable();
             $table->string('withholding_status')->nullable();
             $table->string('quantity')->default(1);
+            $table->string('category')->nullable();
+            $table->string('discount')->nullable();
+            $table->string('entered_unit_price')->nullable();
+            $table->string('general_discount_product')->default(0);
             $table->timestamps();
         }); 
     }

@@ -1,127 +1,61 @@
-<!doctype html>
-<html lang="tr">
+@extends('frontend.main_master')
+@section('content')
+    <!-- Start main-content -->
+    <section class="page-title"
+        style="background-image: url({{ asset('frontend/assets/images/background/page-title.jpg') }});">
+        <div class="auto-container">
+            <div class="title-outer">
+                <h1 class="title">Giriş Yap</h1>
+                <ul class="page-breadcrumb">
+                    <li><a href="{{ route('/') }}">Anasayfa</a></li>
+                    <li>Giriş Yap</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- end main-content -->
+    <!--checkout Start-->
+    <section>
+        <div class="container pt-70">
+            <div class="section-content">
+                <form method="POST" action="{{ route('login') }}" class="form-horizontal mt-3">
+                    @csrf
+                    <div class="row mt-30">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="billing-details">
+                                <h3 class="mb-30">Giriş Yap</h3>
+                                <div class="row">
 
-<head>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="checkuot-form-fname">E-mail</label>
+                                        <input id="checkuot-form-fname" id="email" type="email" name="email"
+                                            :value="old('email')" required autofocus placeholder="E-mail"
+                                            class="form-control">
+                                    </div>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="checkuot-form-lname">Şifre</label>
+                                        <input class="form-control" id="password" type="password" name="password" required
+                                            autocomplete="current-password" placeholder="Şifre">
+                                    </div>
 
-    <meta charset="utf-8" />
-    <title> Giriş Yap </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="" name="description" />
-    <meta content="" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="">
-
-    <!-- Bootstrap Css -->
-    <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
-        type="text/css" />
-    <!-- Icons Css -->
-    <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-    <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-    <!-- Toastr Css-->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-</head>
-
-
-<body style="background-image: url({{ asset('backend/assets/images/background.jpg') }}); width: auto; height: 600px;">
-    <div class="bg-overlay"></div>
-    <div class="wrapper-page">
-        <div class="container-fluid p-0">
-            <div class="card">
-                <div class="card-body">
-
-
-
-                    <h4 class="text-muted text-center font-size-18"><b>Giriş Yap </b></h4>
-
-                    <div class="p-3">
-                        <form method="POST" action="{{ route('login') }}" class="form-horizontal mt-3">
-                            @csrf
-
-                            <div class="form-group mb-3 row">
-                                <div class="col-12">
-                                    <input class="form-control" id="email" type="email" name="email"
-                                        :value="old('email')" required autofocus placeholder="E-mail">
-                                </div>
-                            </div>
-
-                            <div class="form-group mb-3 row">
-                                <div class="col-12">
-                                    <input class="form-control" id="password" type="password" name="password" required
-                                        autocomplete="current-password" placeholder="Password">
-                                </div>
-                            </div>
-
-                            <div class="form-group mb-3 row">
-                                <div class="col-12">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" id="remember_me" name="remember" type="checkbox"
-                                            class="custom-control-input">
-                                        <label class="form-label ms-1" for="customCheck1">Beni Hatırla</label>
+                                    <div class="mb-3">
+                                        <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">
+                                                Giriş Yap
+                                            </span></button>
                                     </div>
                                 </div>
                             </div>
+                            <a href="{{ route('register') }}">Hesabınız Yok mu? Hesap Oluştur</a>
+                        </div>
+                        <div class="col-md-2"></div>
 
-                            <div class="form-group mb-3 text-center row mt-3 pt-1">
-                                <div class="col-12">
-                                    <button class="btn btn-info w-100 waves-effect waves-light" type="submit">
-                                        Giriş Yap
-                                    </button>
-                                </div>
-                            </div>
 
-                           
-                                <div class="col-sm-12 mt-3">
-                                    <a href="{{ route('register') }}" class="text-muted">Hesabınız Yok mu? Hesap Oluştur</a>
-                                </div>
-                            </div>
-                        </form>
+
                     </div>
-                    <!-- end -->
-                </div>
-                <!-- end cardbody -->
+                </form>
             </div>
-            <!-- end card -->
         </div>
-        <!-- end container -->
-    </div>
-    <!-- end -->
-
-    <!-- JAVASCRIPT -->
-    <script src="{{ asset('backend/assets/libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/libs/metismenu/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/libs/node-waves/waves.min.js') }}"></script>
-
-    <script src="{{ asset('backend/assets/js/app.js') }}"></script>
-
-    <!-- Toastr js -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-    <script>
-        @if (Session::has('message'))
-            var type = "{{ Session::get('alert-type', 'info') }}"
-            switch (type) {
-                case 'info':
-                    toastr.info(" {{ Session::get('message') }} ");
-                    break;
-
-                case 'success':
-                    toastr.success(" {{ Session::get('message') }} ");
-                    break;
-
-                case 'warning':
-                    toastr.warning(" {{ Session::get('message') }} ");
-                    break;
-
-                case 'error':
-                    toastr.error(" {{ Session::get('message') }} ");
-                    break;
-            }
-        @endif
-    </script>
-
-</body>
-
-</html>
+    </section>
+    <!--checkout Start-->
+@endsection

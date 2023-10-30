@@ -34,9 +34,46 @@
 
 
                                 <div class="row mb-3">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label">Ad </label>
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Firma Adı </label>
                                     <div class="col-sm-10">
                                         <input class="form-control" name="name" type="text" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Telefon Numarası </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="phone" type="text" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">E-mail </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="email" type="text" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Adres </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="address" type="text" required>
+                                    </div>
+                                </div>
+
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Vergi Numarası </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="tax_number" type="text" required>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Vergi Dairesi </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="tax_administration" type="text" required>
                                     </div>
                                 </div>
 

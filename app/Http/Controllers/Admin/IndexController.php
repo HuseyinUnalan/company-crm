@@ -38,6 +38,10 @@ class IndexController extends Controller
         $data = User::find($id);
         $data->name = $request->name;
         $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->tax_number = $request->tax_number;
+        $data->tax_administration = $request->tax_administration;
+        $data->address = $request->address;
 
 
 
@@ -52,7 +56,7 @@ class IndexController extends Controller
         $data->save();
 
         $notification = array(
-            'message' => 'Admin Profile Updated Successfully',
+            'message' => 'Profil Başarıyla Güncellendi',
             'alert-type' => 'success'
         );
 
@@ -79,10 +83,10 @@ class IndexController extends Controller
             $users->password = bcrypt($request->newpassword);
             $users->save();
 
-            session()->flash('message', 'Password Updated Successfully');
+            session()->flash('message', 'Şifre Başarıyla Güncellendi');
             return redirect()->back();
         } else {
-            session()->flash('message', 'Old Password is Not Match');
+            session()->flash('message', 'Eski Şifre Eşleşmiyor');
             return redirect()->back();
         }
     }

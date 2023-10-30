@@ -10,7 +10,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">Edit Profil Page</h4>
+                            <h4 class="card-title">Şirket Bilgilerini Güncelle</h4>
 
                             <form action="{{ route('store.profile') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -26,7 +26,7 @@
 
 
                                 <div class="row mb-3">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label">Profile Image</label>
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Şirket Logosu</label>
                                     <div class="col-sm-10">
                                         <input id="image" name="profile_image" class="form-control" type="file"
                                             value="{{ $editData->email }}" id="example-text-input">
@@ -36,7 +36,7 @@
 
 
                                 <div class="row mb-3">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Şirket Adı</label>
                                     <div class="col-sm-10">
                                         <input name="name" class="form-control" type="text"
                                             value="{{ $editData->name }}" id="example-text-input">
@@ -53,12 +53,48 @@
                                 </div>
                                 <!-- end row -->
 
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Telefon Numarası</label>
+                                    <div class="col-sm-10">
+                                        <input name="phone" class="form-control" type="text"
+                                            value="{{ $editData->phone }}" id="example-text-input">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Vergi Numarası</label>
+                                    <div class="col-sm-10">
+                                        <input name="tax_number" class="form-control" type="text"
+                                            value="{{ $editData->tax_number }}" id="example-text-input">
+                                    </div>
+                                </div>
+                                <!-- end row -->
 
 
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Vergi Dairesi</label>
+                                    <div class="col-sm-10">
+                                        <input name="tax_administration" class="form-control" type="text"
+                                            value="{{ $editData->tax_administration }}" id="example-text-input">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+                                
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Adres</label>
+                                    <div class="col-sm-10">
+                                        <input name="address" class="form-control" type="text"
+                                            value="{{ $editData->address }}" id="example-text-input">
+                                    </div>
+                                </div>
+                                <!-- end row -->
 
 
                                 <hr>
-                                <input type="submit" class="btn btn-info waves-effect waves-light" value="Update Profile">
+                                <input type="submit" class="btn btn-info waves-effect waves-light" value="Profili Güncelle">
 
 
                             </form>

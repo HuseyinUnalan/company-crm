@@ -16,8 +16,9 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('customer_id');
             $table->string('delivery_date');
-            $table->string('person_to_pay_shipping_cost');
             $table->string('date');
+            $table->string('bid_option')->nullable();
+            $table->string('terms_of_payment')->nullable();
             $table->timestamps();
         });
     }

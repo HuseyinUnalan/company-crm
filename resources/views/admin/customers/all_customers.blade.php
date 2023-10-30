@@ -22,6 +22,22 @@
             <!-- end page title -->
 
 
+            <div class="container mt-2 mb-2">
+                <div class="row">
+
+
+                    <div class="col-md-2">
+                        <a href="{{ route('add.customer.excel') }}" class="btn btn-primary">Excel İle Müşteri Ekle</a>
+                    </div>
+
+                    <div class="col-md-2">
+                        <a href="{{ route('export.customer.excel') }}" class="btn btn-secondary">Excel Müşteri Dışa
+                            Aktar</a>
+                    </div>
+
+                </div>
+            </div>
+
 
             <div class="row">
                 <div class="col-12">

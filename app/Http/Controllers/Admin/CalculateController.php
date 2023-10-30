@@ -7,8 +7,14 @@ use App\Models\Customers;
 use App\Models\OfferDetail;
 use App\Models\Offers;
 use App\Models\Products;
+use App\Models\User;
+use App\Models\UserIBAN;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+use PDF;
 
 class CalculateController extends Controller
 {
@@ -73,7 +79,8 @@ class CalculateController extends Controller
         $sales->customer_id = $request->customer_id;
         $sales->user_id = $userid;
         $sales->delivery_date = $request->delivery_date;
-        $sales->person_to_pay_shipping_cost = $request->person_to_pay_shipping_cost;
+        $sales->bid_option = $request->bid_option;
+        $sales->terms_of_payment = $request->terms_of_payment;
         $sales->date = Carbon::now();
         $sales->save();
         $salesId = $sales->id; // Dönen id'yi alalım
@@ -160,9 +167,52 @@ class CalculateController extends Controller
     {
         $offer = Offers::find($id);
         $offerproducts = OfferDetail::where('sales_id', $id)->get();
+        $userid = auth()->user()->id;
+        $adminData = User::find($userid);
+        $useribans = UserIBAN::where('user_id', $userid)->get();
         $number = 1;
-        return view('admin.calculations.invoice', compact('offer', 'offerproducts', 'number'));
+        return view('admin.calculations.invoice', compact('offer', 'offerproducts', 'number', 'adminData', 'useribans'));
     }
 
+   
 
+    public function SendMail()
+    {
+        require base_path("vendor/autoload.php");
+        try {
+            //Create an instance; passing `true` enables exceptions
+            $mail = new PHPMailer(true);
+            //Server settings
+            $mail->SMTPDebug = 1;                      //Enable verbose debug output
+            $mail->CharSet = 'utf-8';
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'mail.seyyardeveloper.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'info@seyyardeveloper.com';                     //SMTP username
+            $mail->Password   = 'Huseyin1807.';                               //SMTP password
+            $mail->SMTPSecure = 'TLS';            //Enable implicit TLS encryption
+            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+            //Recipients
+            $mail->setFrom('info@seyyardeveloper.com', 'asd');
+            $mail->addAddress('huseyin66unalan@gmail.com', 'asd');     //Add a recipient
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'asd';
+            $mail->Body    = 'aasd';
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
 }
