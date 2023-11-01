@@ -37,19 +37,24 @@
                     <span class="sub-title">Bize Yazın</span>
                     <h2>Bize Mesaj Gönder</h2>
                 </div>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <!-- Contact Form -->
-                <form action="" method="POST">
+                <form action="{{ route('store.message') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <input name="form_name" class="form-control" type="text" placeholder="Ad Soyad"
+                                <input name="name" class="form-control" type="text" placeholder="Ad Soyad"
                                     required>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <input name="form_email" class="form-control required email" type="email"
+                                <input name="email" class="form-control required email" type="email"
                                     placeholder="Email" required>
                             </div>
                         </div>
@@ -57,19 +62,19 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <input name="form_subject" class="form-control required" type="text"
-                                    placeholder="Konu" required>
+                                <input name="subject" class="form-control required" type="text" placeholder="Konu"
+                                    required>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <input name="form_phone" class="form-control" type="text"
-                                    placeholder="Telefon Numarası" required>
+                                <input name="phone" class="form-control" type="text" placeholder="Telefon Numarası"
+                                    required>
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <textarea name="form_message" class="form-control required" rows="7" placeholder="Mesajınız" required></textarea>
+                        <textarea name="message" class="form-control required" rows="7" placeholder="Mesajınız" required></textarea>
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">

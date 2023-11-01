@@ -122,7 +122,7 @@ class CalculateController extends Controller
             'alert-type' => 'success'
         );
         // Başarıyla kaydedildiğine dair mesaj döndür
-        return redirect()->route('detail.offer', ['id' => $salesId, 'user_id' => $userid])->with($notification);
+        return redirect()->route('detail.offer.front', ['id' => $salesId, 'user_id' => $userid])->with($notification);
     }
 
     public function MyOffers()

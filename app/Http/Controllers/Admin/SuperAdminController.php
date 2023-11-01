@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Blogs;
 use App\Models\Customers;
+use App\Models\Messages;
 use App\Models\Offers;
 use App\Models\Products;
 use App\Models\Settings;
@@ -100,6 +101,8 @@ class SuperAdminController extends Controller
         $settings->address = $request->address;
         $settings->whatsapp = $request->whatsapp;
         $settings->map = $request->map;
+        $settings->instagram = $request->instagram;
+        $settings->facebook = $request->facebook;
 
 
         if ($request->file('logo')) {
@@ -117,7 +120,7 @@ class SuperAdminController extends Controller
             $file->move(public_path('upload/logos'), $filename);
             $settings['favicon'] = 'upload/logos/' .  $filename;
         }
-       
+
 
         $settings->save();
 
@@ -357,6 +360,34 @@ class SuperAdminController extends Controller
             'message' => 'Blog Yayına Alındı',
             'alert-type' => 'info'
         );
+        return redirect()->back()->with($notification);
+    }
+
+    public function AllMessage()
+    {
+        $messages = Messages::latest()->get();
+        return view('admin.message.all_message', compact('messages'));
+    }
+
+    public function DetailMessage(Request $request, $id)
+    {
+
+        Messages::findOrFail($id)->update(['status' => 1]);
+
+        $messages = Messages::findOrFail($id);
+        return view('admin.message.detail_message', compact('messages'));
+    }
+
+    public function DeleteMessage($id)
+    {
+
+        Messages::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'Mesaj Başarıyla Silindi',
+            'alert-type' => 'success'
+        );
+
         return redirect()->back()->with($notification);
     }
 }

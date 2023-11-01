@@ -1,17 +1,3 @@
-:root {
-    --var-green: #65CEA7;
-}
-
-label {
-    font-size: 14px;
-    color: #7a7676;
-}
-
-a {
-    text-decoration: none !important;
-}
-
-
 /*COMPONENTS*/
 
 .custom-checkbox {
@@ -42,17 +28,6 @@ a {
 
 .custom-checkbox.active i {
     display: block;
-}
-
-
-/*NAV MENU*/
-
-::-webkit-scrollbar {
-    width: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--var-green);
 }
 
 .side-navbar {

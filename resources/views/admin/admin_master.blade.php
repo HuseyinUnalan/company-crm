@@ -1,15 +1,17 @@
+@php
+    $settings = App\Models\Settings::find(1);
+@endphp
 <!doctype html>
 <html lang="tr">
 
 <head>
     <meta charset="utf-8" />
-    <title>Avantaj Çelik</title>
+    <title>{{ $settings->site_title }} | Panelim</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesdesign" name="author" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="">
-
+    <link rel="shortcut icon" href="{{ asset($settings->favicon) }}" type="image/x-icon">
     <!-- jquery.vectormap css -->
     <link href="{{ asset('backend/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}"
         rel="stylesheet" type="text/css" />
@@ -176,7 +178,7 @@
 
 
 
-   
+
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 

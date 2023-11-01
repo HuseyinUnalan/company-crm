@@ -3,21 +3,21 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="{{ route('/') }}" class="logo logo-dark">
+                <a href="{{ route('dashboard') }}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ asset('upload/avantaj.jpg') }}" alt="logo-sm" width="160" height="auto">
+                        <img src="{{ asset($settings->logo) }}" alt="logo-sm" width="160" height="auto">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('upload/avantaj.jpg') }}" alt="logo-dark" width="160" height="auto">
+                        <img src="{{ asset($settings->logo) }}" alt="logo-dark" width="160" height="auto">
                     </span>
                 </a>
 
-                <a href="{{ route('/') }}" class="logo logo-light">
+                <a href="{{ route('dashboard') }}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ asset('upload/avantaj.jpg') }}" alt="logo-sm-light" width="160" height="auto">
+                        <img src="{{ asset($settings->logo) }}" alt="logo-sm-light" width="160" height="auto">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('upload/avantaj.jpg') }}" alt="logo-light" width="160" height="auto">
+                        <img src="{{ asset($settings->logo) }}" alt="logo-light" width="160" height="auto">
                     </span>
                 </a>
             </div>

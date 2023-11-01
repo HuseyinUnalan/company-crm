@@ -41,7 +41,6 @@ Route::middleware(['user'])->group(function () { // Kernel.php de yol eklendi
 
 
 
-
     // Admin All Route 
     Route::controller(IndexController::class)->group(function () {
         Route::get('/dashboard',  'Index')->name('dashboard');
@@ -159,6 +158,12 @@ Route::middleware(['user'])->group(function () { // Kernel.php de yol eklendi
             Route::get('delete/blog/{id}', 'DeleteBlog')->name('delete.blog');
             Route::get('blog/inactive/{id}', 'BlogInactive')->name('blog.inactive');
             Route::get('blog/active/{id}', 'BlogActive')->name('blog.active');
+
+
+            // Admin Messages 
+            Route::get('all/message', 'AllMessage')->name('all.message');
+            Route::get('detail/message/{id}', 'DetailMessage')->name('detail.message');
+            Route::get('delete/message/{id}', 'DeleteMessage')->name('delete.message');
         });
         Route::get('detail/user/{id}', 'DetailUser')->name('detail.user');
     });
@@ -168,6 +173,8 @@ Route::middleware(['user'])->group(function () { // Kernel.php de yol eklendi
 
     Route::controller(FrontendIndexController::class)->group(function () {
         Route::get('/teklif/hazirla', 'AddOffer')->name('add.offer');
+        Route::get('/tekliflerim', 'MyOffersFront')->name('my.offers.front');
+        Route::get('detail/offers/{id}/{user_id}', 'DetailOfferFront')->name('detail.offer.front');
     });
 });
 

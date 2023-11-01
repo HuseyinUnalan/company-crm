@@ -150,6 +150,24 @@
                                 <!-- end row -->
 
 
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Instagram</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="instagram" value="{{ $settings->instagram }}"
+                                            type="text" >
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Facebook</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="facebook" value="{{ $settings->facebook }}"
+                                            type="text" >
+                                    </div>
+                                </div>
+                                <!-- end row -->
 
 
 

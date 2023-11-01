@@ -60,35 +60,5 @@
 <!--Emd About Section Six-->
 
 
-<section class="services-section-two mb-5">
-    <div class="auto-container">
-        <div class="row">
-            <div class="title-column col-lg-5 col-md-12">
-                <div class="sec-title light">
-                    <span class="sub-title">Ne Yapıyoruz?</span>
-                    <h2>Size İşinizde Kolaylık Sağlıyoruz</h2>
-                    @auth
-                        <a href="{{ route('add.offer') }}" class="theme-btn btn-style-one"><span class="btn-title">
-                                Şimdi Başla
-                            </span></a>
-                    @else
-                        <a href="{{ route('register') }}" class="theme-btn btn-style-one"><span class="btn-title">
-                                Şimdi Başla
-                            </span></a>
-                    @endauth
-                </div>
-            </div>
 
-            <div class="services-column col-lg-7 col-md-12">
-                <div class="inner-column">
-                    <iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/LW-myQJceTE?si=PiVgUT8LTfxH1csD" title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 @endsection

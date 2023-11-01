@@ -29,7 +29,7 @@
                 </li>
 
 
-                
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-honour-line"></i>
@@ -41,23 +41,36 @@
                     </ul>
                 </li>
 
-
-
                 <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-honour-line"></i>
+                        <span>Profil İşlemleri</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('edit.profile') }}">Profil Düzenle</a></li>
+                        <li><a href="{{ route('change.password') }}">Şifre Değiş</a></li>
+                    </ul>
+                </li>
+
+
+
+
+
+                {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-honour-line"></i>
                         <span>Teklif İşlemleri</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        {{-- <li><a href="{{ route('calculate') }}">Teklif Hazırla</a></li> --}}
+                       <li><a href="{{ route('calculate') }}">Teklif Hazırla</a></li> 
                         <li><a href="{{ route('my.offers') }}">Tekliflerim</a></li>
 
 
                     </ul>
-                </li>
+                </li> --}}
 
                 <li>
-                    <a href="{{ route('/') }}">
+                    <a href="{{ route('/') }}" target="_blank">
                         <i class="ri-honour-line"></i>
                         <span>Web Sitesi</span>
                     </a>
@@ -157,6 +170,27 @@
                             <li><a href="{{ route('all.blog') }}">Blog Listesi</a></li>
                             <li><a href="{{ route('add.blog') }}">Blog Ekle</a></li>
                         </ul>
+                    </li>
+
+
+                    @php
+                        $message = DB::table('messages')
+                            ->where('status', 0)
+                            ->count();
+                    @endphp
+                    
+                    <li>
+                        <a href="{{ route('all.message') }}" class=" waves-effect">
+                            <i class="fas fa-envelope"></i>
+                            <span>Mesajlar</span>
+                            @if ($message > 0)
+                                @php
+                                    $unread = $message;
+                                @endphp
+                                <span class="badge rounded-pill bg-success float-end">{{ $message }}</span>
+                            @else
+                            @endif
+                        </a>
                     </li>
                 @else
                 @endif

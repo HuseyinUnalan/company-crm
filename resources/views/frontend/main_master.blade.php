@@ -25,7 +25,7 @@
     <link href="{{ asset('frontend/assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/assets/css/responsive.css') }}" rel="stylesheet">
 
-    <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset($settings->favicon) }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('frontend/assets/images/favicon.png') }}" type="image/x-icon">
     <link href="{{ asset('frontend/assets/css/new.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <!-- Responsive -->
@@ -84,6 +84,68 @@
     <script src="{{ asset('frontend/assets/js/swiper.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/owl.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/script.js') }}"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $(document).on('click', '#delete', function(e) {
+                e.preventDefault();
+                var link = $(this).attr("href");
+                Swal.fire({
+                    title: 'Silmek İstediğine Emin misin?',
+                    text: "Bunu geri döndüremezsiniz!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Evet, Sil!',
+                    cancelButtonText: 'İptal Et!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = link
+                        Swal.fire(
+                            'Silindi!',
+                            'Kayıt Başarıyla Silindi.',
+                            'success'
+                        )
+                    }
+                })
+            });
+        });
+    </script>
+
+    @auth
+        <!-- GetButton.io widget -->
+        <script type="text/javascript">
+            (function() {
+                var options = {
+                    whatsapp: "+(90){{ $settings->whatsapp }}", // WhatsApp number
+                    call_to_action: "Bize mesaj gönderin", // Call to action
+                    position: "left", // Position may be 'right' or 'left'
+                };
+                var proto = document.location.protocol,
+                    host = "getbutton.io",
+                    url = proto + "//static." + host;
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.src = url + '/widget-send-button/js/init.js';
+                s.onload = function() {
+                    WhWidgetSendButton.init(host, proto, options);
+                };
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            })
+            ();
+        </script>
+        <!-- /GetButton.io widget -->
+    @else
+    @endauth
+
+
+
 </body>
 
 </html>

@@ -15,14 +15,12 @@
 
         </div>
 
-        {{-- <div class="outer-box">
+        <div class="outer-box">
             <ul class="social-icon-one">
-                <li><a href="#"><span class="fab fa-twitter"></span></a></li>
-                <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
-                <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
-                <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                <li><a href="{{ $settings->facebook }}"><span class="fab fa-facebook-square"></span></a></li>
+                <li><a href="{{ $settings->instagram }}"><span class="fab fa-instagram"></span></a></li>
             </ul>
-        </div> --}}
+        </div>
     </div>
     <!-- Header Top -->
 
@@ -45,32 +43,22 @@
                         <li><a href="{{ route('home.about') }}">Hakkımızda</a></li>
                         <li><a href="{{ route('home.contact') }}">İletişim</a></li>
                         <li><a href="{{ route('home.blogs') }}">Blog</a></li>
+                        @auth
+                            <li><a href="{{ route('add.offer') }}">Teklif Hazırla</a></li>
+                            <li><a href="{{ route('my.offers.front') }}">Tekliflerim</a></li>
+                            <li><a href="{{ route('dashboard') }}">Panelim</a></li>
+                            <li><a href="{{ route('admin.logout') }}">Çıkış Yap</a></li>
+                        @else
+                            <li><a href="{{ route('login') }}">Giriş Yap</a></li>
+                            <li><a href="{{ route('register') }}">Kayıt Ol</a></li>
+                        @endauth
+
                     </ul>
                 </nav>
                 <!-- Main Menu End-->
 
 
                 <div class="outer-box">
-                    @auth
-                        <a href="{{ route('add.offer') }}" class="theme-btn btn-style-one"><span class="btn-title">
-                                Teklif Hazırla
-                            </span></a>
-                        <a href="{{ route('dashboard') }}" class="theme-btn btn-style-one"><span class="btn-title">
-                                Panelim
-                            </span></a>
-                        <a href="{{ route('admin.logout') }}" class="theme-btn btn-style-one"><span class="btn-title">
-                                Çıkış Yap
-                            </span></a>
-                    @else
-                        <a href="{{ route('login') }}" class="theme-btn btn-style-one"><span class="btn-title">
-                                Giriş Yap
-                            </span></a>
-                        <a href="{{ route('register') }}" class="theme-btn btn-style-one"><span class="btn-title">
-                                Kayıt Ol
-                            </span></a>
-                    @endauth
-
-
                     <!-- Mobile Nav toggler -->
                     <div class="mobile-nav-toggler"><span class="icon lnr-icon-bars"></span></div>
                 </div>
@@ -115,12 +103,10 @@
             </ul>
 
 
-            {{-- <ul class="social-links">
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-            </ul> --}}
+            <ul class="social-links">
+                <li><a href="{{ $settings->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="{{ $settings->instagram }}"><i class="fab fa-instagram"></i></a></li>
+            </ul>
         </nav>
     </div><!-- End Mobile Menu -->
 

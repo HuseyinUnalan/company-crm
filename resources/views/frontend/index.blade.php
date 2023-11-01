@@ -57,11 +57,11 @@
                             data-frames='[{"delay":1000,"speed":1500,"frame":"0","from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
                             @auth
                                 <a href="{{ route('add.offer') }}" class="theme-btn btn-style-one"><span class="btn-title">
-                                        Şimdi Başla
+                                        Teklif Oluştur
                                     </span></a>
                             @else
                                 <a href="{{ route('register') }}" class="theme-btn btn-style-one"><span class="btn-title">
-                                        Şimdi Başla
+                                        Teklif Oluştur
                                     </span></a>
                             @endauth
                         </div>
@@ -108,38 +108,6 @@
 </section>
 <!--Emd About Section -->
 
-
-<section class="services-section-two">
-    <div class="auto-container">
-        <div class="row">
-            <div class="title-column col-lg-5 col-md-12">
-                <div class="sec-title light">
-                    <span class="sub-title">Ne Yapıyoruz?</span>
-                    <h2>Size İşinizde Kolaylık Sağlıyoruz</h2>
-                    @auth
-                        <a href="{{ route('add.offer') }}" class="theme-btn btn-style-one"><span class="btn-title">
-                                Şimdi Başla
-                            </span></a>
-                    @else
-                        <a href="{{ route('register') }}" class="theme-btn btn-style-one"><span class="btn-title">
-                                Şimdi Başla
-                            </span></a>
-                    @endauth
-                </div>
-            </div>
-
-            <div class="services-column col-lg-7 col-md-12">
-                <div class="inner-column">
-                    <iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/LW-myQJceTE?si=PiVgUT8LTfxH1csD"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 
 
